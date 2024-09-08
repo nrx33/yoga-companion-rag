@@ -1,1 +1,1 @@
-# fitness-assistant-rag
+# Wellness Wizard RAG Application
