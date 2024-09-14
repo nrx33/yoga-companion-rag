@@ -3,12 +3,11 @@
 #### Maintaining a regular yoga practice can be challenging, especially for beginners. Studios can be intimidating, and personal instructors aren't always accessible or affordable. The AI Yoga Assistant provides a conversational AI that helps users choose yoga poses, find modifications, and create personalized sequences, making yoga more approachable and manageable for practitioners of all levels.
 
 ## Techologies
-* Python 3.12
-* Docker and Docker Compose for containerization
-* Minsearch for full-text search
-* Flask as the API interface 
+* [Minsearch](https://github.com/alexeygrigorev/minsearch) - for full text search 
+* GPT 4o-Mini as an LLM
+* Flask as the API interface
+* Streamlit for creating the user interface
 * Grafana for monitoring and PostgreSQL as the backend for it
-* OpenAI as an LLM
 
 ## Intructions to run the application
 
@@ -17,6 +16,78 @@ Installing dependencies
 ```bash
 pipenv install
 ```
+
+## Flask
+It's a web application framework for Python: we can easily create an endpoint for asking questions and use web clients (like curl or requests) for communicating with it.
+
+In our case, we can send questions to http://localhost:5000/question.
+
+For more information, [click here](https://flask.palletsprojects.com/en/3.0.x/)
+
+## Testing API
+When the application is running you can use `curl` for interacting with the API
+
+```bash
+URL=http://localhost:5000
+QUESTION="How do I perform the variation of Warrior I with a block?"
+DATA='{
+    "question": "'${QUESTION}'"
+}'
+
+curl -X POST \
+    -H "Content-Type: application/json" \
+    -d "${DATA}" \
+    ${URL}/question
+```
+
+You will see something like the following in the response
+
+```bash
+{
+  "answer": "To perform the variation of Warrior I with a block:\n\n1. Kneel on the mat and sit back on your heels.\n2. Stretch your arms forward while lowering your chest towards the mat.\n3. Use the block for support as you relax into the pose, breathing deeply.\n\nThis variation focuses on the back and helps relieve stress, and it is often practiced in restorative sessions.",
+  "conversation_id": "ba09fb04-1309-43ff-b761-11b0e1e42fee",
+  "question": "How do I perform the variation of Warrior I with a block?"
+}
+```
+
+Sending feedback
+
+```bash
+ID="ba09fb04-1309-43ff-b761-11b0e1e42fee"
+URL=http://localhost:5000
+FEEDBACK_DATA='{
+    "conversation_id": "'${ID}'",
+    "feedback": 1
+}'
+
+curl -X POST \
+    -H "Content-Type: application/json" \
+    -d "${FEEDBACK_DATA}" \
+    ${URL}/feedback
+```
+
+After sending it, you'll receive the acknowledgement
+
+```bash
+{
+  "message": "Feedback received for conversation ba09fb04-1309-43ff-b761-11b0e1e42fee: 1"
+}
+```
+
+Alternatively, you can also use `requests` to send questions - use [test.py](yoga-companion/test.py) for the testing process. The output should look something like the following
+
+```bash
+$ python test.py 
+question:  What are the primary benefits of practicing the Camel Pose, particularly in its reclining variation?
+{'answer': 'The primary benefits of practicing the Camel Pose, particularly in its reclining variation, include:\n\n- **Increases energy**: This restorative option is designed to uplift and energize the body.\n- **Focus on core strength**: The pose emphasizes core engagement, making it beneficial for building strength in that area.\n\nThe reclining variation is specifically beneficial for grounding and relaxation, ideal during restorative sessions.', 'conversation_id': '04e1c93e-fc8e-470e-b6b5-28226ebc67f5', 'question': 'What are the primary benefits of practicing the Camel Pose, particularly in its reclining variation?'}
+```
+
+## Streamlit 
+Streamlit is an open-source Python framework that allows you to create and share beautiful, interactive web applications for machine learning and data science projects with minimal code.
+
+For more information, [Click Here](https://docs.streamlit.io/)
+
+![user-interface](assets/user_interface_streamlit.png)
 
 ## Experiments
 For experiments, we use Jupyter notebooks. They are in the notebooks folder.
