@@ -7,11 +7,11 @@ name = "pypi"
 openai = "*"
 scikit-learn = "*"
 pandas = "*"
-flask = "*"
 streamlit = "*"
 psycopg2-binary = "*"
 python-dotenv = "*"
-gunicorn = "*"
+fastapi = "*"
+uvicorn = "*"
 
 [dev-packages]
 tqdm = "*"
