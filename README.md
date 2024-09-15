@@ -7,20 +7,10 @@
 ### Techologies
 * [Minsearch](https://github.com/alexeygrigorev/minsearch) - for full text search 
 * GPT 4o-Mini as an LLM
-* Flask as the API interface endpoint
+* FastAPI as the API interface endpoint
 * Streamlit for creating the user interface
 * Grafana for monitoring 
 * PostgreSQL as the backend database
-
-### Project Evaluation
-* Both a knowledge base and an LLM are used in the RAG flow
-* Multiple retrieval approaches are evaluated, and the best one is used
-* Multiple RAG approaches are evaluated, and the best one is used
-* Streamlit frontend and Flask backend API
-* Automated ingestion with a Python script
-* User feedback is collected and there's a dashboard
-* All required service is containerized and in docker-compose
-* Code is reproducible, Instructions are clear, the dataset is accessible, its easy to run the code and it works
 
 ### Video Instructions
 - [Project Setup](https://www.loom.com/share/d7814589f590430b806f93baa8dcb496?sid=488c1063-374d-4407-aef4-7bd4000f3366)
@@ -85,7 +75,7 @@ A working monitoring dashboard should look like this.
 ### Code
 The code for the application is in the [yoga-companion](yoga-companion) folder:
 
-* [app.py](yoga-companion/app.py) - the Flask API, the main entrypoint to the application
+* [app.py](yoga-companion/app.py) - the FastAPI, the main entrypoint to the application
 * [rag.py](yoga-companion/rag.py) - the main RAG logic for building the retrieving the data and building the prompt
 * [ingest.py](yoga-companion/ingest.py) - loading the data into the knowledge base
 * [minsearch.py](yoga-companion/minsearch.py) - an in-memory search engine
@@ -161,15 +151,27 @@ We also tested gpt-4o:
 
 The difference is significant, so we opted for gpt-4o-mini due to efficiency and cost ratio.
 
-### Background
+## Background
 Here we provide background on some technologies used
 
-### Flask
-It's a web application framework for Python: we can easily create an endpoint for asking questions and use web clients (like curl or requests) for communicating with it.
+### FastAPI
 
-For more information, [click here](https://flask.palletsprojects.com/en/3.0.x/)
+FastAPI is a modern, high-performance web framework for Python that simplifies the process of building APIs by leveraging Python type hints. It enables developers to quickly create endpoints for tasks like asking questions, and clients can communicate with the API using tools like `curl` or `requests`.
+
+For more information, [click here](https://fastapi.tiangolo.com/)
+
 
 ### Streamlit 
 Streamlit is an open-source Python framework that allows you to create and share beautiful, interactive web applications for machine learning and data science projects with minimal code.
 
 For more information, [click here](https://docs.streamlit.io/)
+
+### Project Evaluation
+* Both a knowledge base and an LLM are used in the RAG flow
+* Multiple retrieval approaches are evaluated, and the best one is used
+* Multiple RAG approaches are evaluated, and the best one is used
+* Streamlit frontend and FastAPI backend API
+* Automated ingestion with a Python script
+* User feedback is collected and there's a dashboard
+* All required service is containerized and in docker-compose
+* Code is reproducible, Instructions are clear, the dataset is accessible, its easy to run the code and it works
