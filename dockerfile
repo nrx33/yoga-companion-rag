@@ -14,4 +14,4 @@ COPY yoga-companion .
 EXPOSE 5000
 EXPOSE 8501
 
-CMD ["sh", "-c", "python app.py & streamlit run streamlit_app.py"]
+CMD ["sh", "-c", "uvicorn app:app --host 0.0.0.0 --port 5000 & streamlit run streamlit_app.py"]
