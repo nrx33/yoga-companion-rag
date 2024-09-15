@@ -31,11 +31,9 @@ After providing your API key run the following commands one by one to setup the 
 ```bash
 pipenv install
 pipenv install --dev
-docker-compose up postgres
+docker-compose up -d postgres
 pipenv shell
 cd yoga-companion
-pipenv shell
-cd fitness_assistant
 export POSTGRES_HOST=localhost
 python db_prep.py
 exit
