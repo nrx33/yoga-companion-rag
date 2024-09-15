@@ -22,6 +22,11 @@
 * All required service is containerized and in docker-compose
 * Code is reproducible, Instructions are clear, the dataset is accessible, its easy to run the code and it works
 
+### Video Instructions
+- [Project Setup](https://www.loom.com/share/d7814589f590430b806f93baa8dcb496?sid=488c1063-374d-4407-aef4-7bd4000f3366)
+- [Running Application using Docker](https://www.loom.com/share/e0342fc82c744a7eafcfd8ced9abe2c5?sid=e118b70a-c100-4bb7-898f-97811f5f98c2)
+- [Monitoring using Grafana](https://www.loom.com/share/92ce956787c24a7e87c42e118318d472?sid=51c35be7-d3ab-4ae1-ae28-be7fe1ec9fa8)
+
 ### Project Setup
 
 **IMPORTANT:** Open the [.env](.env) file in the root directory and replace `YOUR-KEY-HERE` in `OPENAI_API_KEY` variable with your own OpenAI key. Also, all the terminal commands assumes you are at the root directory.
@@ -59,7 +64,7 @@ A working application should look like this.
 ### Monitoring using Grafana
 All the configuration files are in the [`grafana`](grafana) folder
 
-To import the dashboard run the following commands one by one but make sure docker-compose is running beforehand.
+To import the dashboard run the following commands one by one but make sure `docker-compose` is running beforehand.
 
 ```bash
 pipenv shell
