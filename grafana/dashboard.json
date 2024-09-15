@@ -30,8 +30,9 @@
   "panels": [
     {
       "datasource": {
-        "type": "postgres",
-        "uid": "bdxx2dmsfkmwwb"
+        "default": true,
+        "type": "grafana-postgresql-datasource",
+        "uid": "fdxxftke0ix34c"
       },
       "fieldConfig": {
         "defaults": {
@@ -88,7 +89,7 @@
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "SELECT\r\n  SUM(CASE WHEN feedback > 0 THEN 1 ELSE 0 END) as thumbs_up,\r\n  SUM(CASE WHEN feedback < 0 THEN 1 ELSE 0 END) as thumbs_down\r\nFROM feedback\r\nWHERE timestamp BETWEEN $__timeFrom() AND $__timeTo()\r\n",
+          "rawSql": "SELECT\r\n  SUM(CASE WHEN feedback > 0 THEN 1 ELSE 0 END) as POSITIVE,\r\n  SUM(CASE WHEN feedback < 0 THEN 1 ELSE 0 END) as NEGATIVE\r\nFROM feedback\r\nWHERE timestamp BETWEEN $__timeFrom() AND $__timeTo()\r\n",
           "refId": "A",
           "sql": {
             "columns": [
@@ -117,7 +118,7 @@
       "datasource": {
         "default": true,
         "type": "grafana-postgresql-datasource",
-        "uid": "bdxx2dmsfkmwwb"
+        "uid": "fdxxftke0ix34c"
       },
       "fieldConfig": {
         "defaults": {
@@ -201,7 +202,7 @@
     {
       "datasource": {
         "type": "postgres",
-        "uid": "bdxx2dmsfkmwwb"
+        "uid": "fdxxftke0ix34c"
       },
       "fieldConfig": {
         "defaults": {
@@ -354,7 +355,7 @@
     {
       "datasource": {
         "type": "postgres",
-        "uid": "bdxx2dmsfkmwwb"
+        "uid": "fdxxftke0ix34c"
       },
       "fieldConfig": {
         "defaults": {
@@ -484,7 +485,7 @@
       "datasource": {
         "default": true,
         "type": "grafana-postgresql-datasource",
-        "uid": "bdxx2dmsfkmwwb"
+        "uid": "fdxxftke0ix34c"
       },
       "fieldConfig": {
         "defaults": {
@@ -645,7 +646,7 @@
   "timepicker": {},
   "timezone": "",
   "title": "Yoga Companion",
-  "uid": "fdxx2dmvrfri8b",
-  "version": 6,
+  "uid": "edxxftkh2egaoe",
+  "version": 2,
   "weekStart": ""
 }
