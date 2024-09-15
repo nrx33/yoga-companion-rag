@@ -110,7 +110,7 @@ The dataset used in this project contains information about various yoga poses, 
 - Instructions: Step-by-step guidance on how to perform the pose correctly
 - Context: Suggestions for when to use the pose in a yoga sequence or routine
 
-The [dataset](data/yoga_poses.csv) was generated using LLM in CSV format and contains 150 records. It serves as the foundation for understanding various yoga poses, their characteristics and their applications in different yoga practices.
+The [dataset](data/yoga_poses.csv) was generated using LLM in CSV format and contains 145 records. It serves as the foundation for understanding various yoga poses, their characteristics and their applications in different yoga practices.
 
 ### Experiments
 For experiments, we use Jupyter notebooks. They are in the notebooks folder.
