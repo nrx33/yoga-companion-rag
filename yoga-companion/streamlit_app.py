@@ -149,16 +149,18 @@ if st.session_state.show_feedback and not st.session_state.feedback_given:
         # Track the user selection
         feedback_option = st.radio(
             "Was the answer helpful?", 
-            (1, -1), 
+            ("Positive", "Negative"), 
             index=0, 
             key="feedback_option"
         )
         
         if st.button("Submit Feedback"):
-            # Use the selected value from the radio button directly
+            # Map feedback strings to integers
+            feedback_value = 1 if feedback_option == "Positive" else -1
+            
             feedback_response = requests.post(
                 "http://localhost:5000/feedback", 
-                json={"conversation_id": st.session_state.conversation_id, "feedback": feedback_option}
+                json={"conversation_id": st.session_state.conversation_id, "feedback": feedback_value}
             )
             if feedback_response.status_code == 200:
                 st.success("Feedback submitted successfully!")
