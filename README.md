@@ -12,6 +12,8 @@
 * Grafana for monitoring 
 * PostgreSQL as the backend database
 
+![archtecture](assets/application_architecture.png)
+
 ### Video Instructions
 - [Project Setup](https://www.loom.com/share/d7814589f590430b806f93baa8dcb496?sid=488c1063-374d-4407-aef4-7bd4000f3366)
 - [Running Application using Docker](https://www.loom.com/share/e0342fc82c744a7eafcfd8ced9abe2c5?sid=e118b70a-c100-4bb7-898f-97811f5f98c2)
