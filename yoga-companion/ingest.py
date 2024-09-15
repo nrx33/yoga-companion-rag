@@ -1,9 +1,12 @@
 # import the necessary libraries
 import minsearch
 import pandas as pd
+import os
+
+DATA_PATH = os.getenv("DATA_PATH", "../data/yoga_poses.csv")
 
 
-def load_index(data_path="/workspaces/fitness-assistant-rag/data/yoga_poses.csv"):
+def load_index(data_path=DATA_PATH):
     # Load the data
     data = pd.read_csv(data_path)
 

@@ -1,14 +1,15 @@
 import uuid
 from flask import Flask, request, jsonify
 from rag import rag
-# import db
+import db
 
 app = Flask(__name__)
+
 
 @app.route("/question", methods=["POST"])
 def handle_question():
     data = request.json
-    question = data.get("question")
+    question = data["question"]
 
     if not question:
         return jsonify({"error": "No question provided"}), 400
@@ -20,37 +21,37 @@ def handle_question():
     result = {
         "conversation_id": conversation_id,
         "question": question,
-        "answer": answer_data,  # Use answer_data directly as it's a string
+        "answer": answer_data["answer"],
     }
 
-    # Remove the database saving logic
-    # db.save_conversation(
-    #     conversation_id=conversation_id,
-    #     question=question,
-    #     answer_data=answer_data,
-    # )
+    db.save_conversation(
+        conversation_id=conversation_id,
+        question=question,
+        answer_data=answer_data,
+    )
 
     return jsonify(result)
+
 
 @app.route("/feedback", methods=["POST"])
 def handle_feedback():
     data = request.json
-    conversation_id = data.get("conversation_id")
-    feedback = data.get("feedback")
+    conversation_id = data["conversation_id"]
+    feedback = data["feedback"]
 
     if not conversation_id or feedback not in [1, -1]:
         return jsonify({"error": "Invalid input"}), 400
 
-    # Remove the database saving logic
-    # db.save_feedback(
-    #     conversation_id=conversation_id,
-    #     feedback=feedback,
-    # )
+    db.save_feedback(
+        conversation_id=conversation_id,
+        feedback=feedback,
+    )
 
     result = {
         "message": f"Feedback received for conversation {conversation_id}: {feedback}"
     }
     return jsonify(result)
+
 
 if __name__ == "__main__":
     app.run(debug=True)

@@ -2,94 +2,86 @@
 
 #### Maintaining a regular yoga practice can be challenging, especially for beginners. Studios can be intimidating, and personal instructors aren't always accessible or affordable. The AI Yoga Assistant provides a conversational AI that helps users choose yoga poses, find modifications, and create personalized sequences, making yoga more approachable and manageable for practitioners of all levels.
 
-## Techologies
+### Techologies
 * [Minsearch](https://github.com/alexeygrigorev/minsearch) - for full text search 
 * GPT 4o-Mini as an LLM
-* Flask as the API interface
+* Flask as the API interface endpoint
 * Streamlit for creating the user interface
-* Grafana for monitoring and PostgreSQL as the backend for it
+* Grafana for monitoring 
+* PostgreSQL as the backend database
 
-## Intructions to run the application
+### Project Setup
 
-Installing dependencies
+Run the following commands one by one to setup the project
 
 ```bash
 pipenv install
+pipenv install --dev
+docker-compose up postgres
+pipenv shell
+cd yoga-companion
+pipenv shell
+cd fitness_assistant
+export POSTGRES_HOST=localhost
+python db_prep.py
+exit
+docker-compose down postgres
 ```
 
-## Flask
-It's a web application framework for Python: we can easily create an endpoint for asking questions and use web clients (like curl or requests) for communicating with it.
+If you see the following message without errors then you are done setting up the project
 
-In our case, we can send questions to http://localhost:5000/question.
+`Initializing database...`
 
-For more information, [click here](https://flask.palletsprojects.com/en/3.0.x/)
-
-## Testing API
-When the application is running you can use `curl` for interacting with the API
+### Running Application using Docker
+First, start the required services by running the following command
 
 ```bash
-URL=http://localhost:5000
-QUESTION="How do I perform the variation of Warrior I with a block?"
-DATA='{
-    "question": "'${QUESTION}'"
-}'
-
-curl -X POST \
-    -H "Content-Type: application/json" \
-    -d "${DATA}" \
-    ${URL}/question
+docker-compose up
 ```
 
-You will see something like the following in the response
+If all the services are running successfully visit [http://localhost:8501](http://localhost:8501) to start the application interface
 
-```bash
-{
-  "answer": "To perform the variation of Warrior I with a block:\n\n1. Kneel on the mat and sit back on your heels.\n2. Stretch your arms forward while lowering your chest towards the mat.\n3. Use the block for support as you relax into the pose, breathing deeply.\n\nThis variation focuses on the back and helps relieve stress, and it is often practiced in restorative sessions.",
-  "conversation_id": "ba09fb04-1309-43ff-b761-11b0e1e42fee",
-  "question": "How do I perform the variation of Warrior I with a block?"
-}
-```
-
-Sending feedback
-
-```bash
-ID="ba09fb04-1309-43ff-b761-11b0e1e42fee"
-URL=http://localhost:5000
-FEEDBACK_DATA='{
-    "conversation_id": "'${ID}'",
-    "feedback": 1
-}'
-
-curl -X POST \
-    -H "Content-Type: application/json" \
-    -d "${FEEDBACK_DATA}" \
-    ${URL}/feedback
-```
-
-After sending it, you'll receive the acknowledgement
-
-```bash
-{
-  "message": "Feedback received for conversation ba09fb04-1309-43ff-b761-11b0e1e42fee: 1"
-}
-```
-
-Alternatively, you can also use `requests` to send questions - use [test.py](yoga-companion/test.py) for the testing process. The output should look something like the following
-
-```bash
-$ python test.py 
-question:  What are the primary benefits of practicing the Camel Pose, particularly in its reclining variation?
-{'answer': 'The primary benefits of practicing the Camel Pose, particularly in its reclining variation, include:\n\n- **Increases energy**: This restorative option is designed to uplift and energize the body.\n- **Focus on core strength**: The pose emphasizes core engagement, making it beneficial for building strength in that area.\n\nThe reclining variation is specifically beneficial for grounding and relaxation, ideal during restorative sessions.', 'conversation_id': '04e1c93e-fc8e-470e-b6b5-28226ebc67f5', 'question': 'What are the primary benefits of practicing the Camel Pose, particularly in its reclining variation?'}
-```
-
-## Streamlit 
-Streamlit is an open-source Python framework that allows you to create and share beautiful, interactive web applications for machine learning and data science projects with minimal code.
-
-For more information, [Click Here](https://docs.streamlit.io/)
-
+A working application should look like this 
 ![user-interface](assets/user_interface_streamlit.png)
 
-## Experiments
+### Testing API
+
+### Monitoring using Grafana
+All the configuration files are in the [`grafana`](grafana) folder
+
+To import the dashboard run the following commands one by one but make sure docker-compose is running beforehand
+
+```bash
+pipenv shell
+cd grafana
+python init.py
+exit
+```
+
+Then visit [http://localhost:3000/](http://localhost:3000/) and login using the following information<br>
+username: `admin`<br>
+password: `admin`
+
+After first login it will ask you to change the password which you may do or you can just press the skip button if you dont want to do that
+
+After successfully logging in click on `Dashboards` on the left sidebar and then click on `Yoga Companion` from the list
+
+A working monitoring dashboard should look like this 
+![user-interface](assets/grafana_dashboard.png)
+
+### Code
+The code for the application is in the [yoga-companion](yoga-companion) folder:
+
+* app.py - the Flask API, the main entrypoint to the application
+* rag.py - the main RAG logic for building the retrieving the data and building the prompt
+* ingest.py - loading the data into the knowledge base
+* minsearch.py - an in-memory search engine
+* db.py - the logic for logging the requests and responses to postgres
+* db_prep.py - the script for initializing the database
+* test.py - select a random question for testing
+* streamlit_app.py - the logic for generating the user interface
+
+### Experiments
 For experiments, we use Jupyter notebooks. They are in the notebooks folder.
 
 
@@ -98,7 +90,7 @@ We have the following notebooks:
 * [`rag-test.ipynb`](notebooks/rag-test.ipynb): The RAG flow and evaluating the system.
 * [`eval-data-gen.ipynb`](notebooks/eval-data-gen.ipynb): Generating the ground truth dataset for retrieval evaluation.
 
-## Retrieval Evaluation
+### Retrieval Evaluation
 The basic approach - using minsearch without any boosting - gave the following metrics:
 * Hit rate: 86.9%
 * MRR: 52.5%
@@ -124,7 +116,7 @@ boost = {
 }
 ```
 
-## RAG flow evaluation
+### RAG flow evaluation
 We used the LLM-as-a-Judge metric to evaluate the quality of our RAG flow.
 
 For gpt-4o-mini, in a sample with 200 records, we had:
@@ -138,3 +130,16 @@ We also tested gpt-4o:
 * 22 (11%) NON_RELEVANT
 
 The difference is significant, so we opted for gpt-4o-mini due to efficiency and cost ratio.
+
+### Background
+Here we provide background on some technologies used
+
+### Flask
+It's a web application framework for Python: we can easily create an endpoint for asking questions and use web clients (like curl or requests) for communicating with it.
+
+For more information, [click here](https://flask.palletsprojects.com/en/3.0.x/)
+
+### Streamlit 
+Streamlit is an open-source Python framework that allows you to create and share beautiful, interactive web applications for machine learning and data science projects with minimal code.
+
+For more information, [click here](https://docs.streamlit.io/)
