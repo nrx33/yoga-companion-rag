@@ -91,7 +91,6 @@ The code for the application is in the [yoga-companion](yoga-companion) folder:
 * [minsearch.py](yoga-companion/minsearch.py) - an in-memory search engine
 * [db.py](yoga-companion/db.py) - the logic for logging the requests and responses to postgres
 * [db_prep.py](yoga-companion/db_prep.py) - the script for initializing the database
-* [test.py](yoga-companion/test.py) - select a random question for testing
 * [streamlit_app.py](yoga-companion/streamlit_app.py) - the logic for generating the user interface
 
 ### Dataset
