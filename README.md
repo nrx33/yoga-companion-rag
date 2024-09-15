@@ -98,17 +98,17 @@ The code for the application is in the [yoga-companion](yoga-companion) folder:
 
 The dataset used in this project contains information about various yoga poses, including:
 
-- Pose Name: The name of the yoga pose (e.g., Downward Dog, Eagle Pose, Warrior I)
-- Type of Practice: The style of yoga the pose is commonly used in (e.g., Yin, Vinyasa, Ashtanga, Restorative, Power)
-- Variation: Any specific variation of the pose (e.g., Twisted, Reclining, With Block, No Variation)
-- Position: The general body position for the pose (e.g., Standing, Lying Down, Mixed, Sitting)
-- Difficulty: The level of difficulty for the pose (e.g., Beginner, Intermediate, Advanced)
-- Props Required: Any equipment needed for the pose (e.g., Chair, Block, Strap, Blanket, Not Required)
-- Body Focus: The primary area of the body targeted by the pose (e.g., Flexibility, Balance, Core, Strength, Back)
-- Benefits: The main benefits associated with practicing the pose (e.g., Builds strength, Improves balance, Relieves stress, Increases energy)
-- Synonyms: Alternative names for the pose
-- Instructions: Step-by-step guidance on how to perform the pose correctly
-- Context: Suggestions for when to use the pose in a yoga sequence or routine
+- `Pose Name`: The name of the yoga pose (e.g., Downward Dog, Eagle Pose, Warrior I)
+- `Type of Practice`: The style of yoga the pose is commonly used in (e.g., Yin, Vinyasa, Ashtanga, Restorative, Power)
+- `Variation`: Any specific variation of the pose (e.g., Twisted, Reclining, With Block, No Variation)
+- `Position`: The general body position for the pose (e.g., Standing, Lying Down, Mixed, Sitting)
+- `Difficulty`: The level of difficulty for the pose (e.g., Beginner, Intermediate, Advanced)
+- `Props Required`: Any equipment needed for the pose (e.g., Chair, Block, Strap, Blanket, Not Required)
+- `Body Focus`: The primary area of the body targeted by the pose (e.g., Flexibility, Balance, Core, Strength, Back)
+- `Benefits`: The main benefits associated with practicing the pose (e.g., Builds strength, Improves balance, Relieves stress, Increases energy)
+- `Synonyms`: Alternative names for the pose
+- `Instructions`: Step-by-step guidance on how to perform the pose correctly
+- `Context`: Suggestions for when to use the pose in a yoga sequence or routine
 
 The [dataset](data/yoga_poses.csv) was generated using LLM in CSV format and contains 145 records. It serves as the foundation for understanding various yoga poses, their characteristics and their applications in different yoga practices.
 
