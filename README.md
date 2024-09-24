@@ -167,13 +167,3 @@ For more information, [click here](https://fastapi.tiangolo.com/)
 Streamlit is an open-source Python framework that allows you to create and share beautiful, interactive web applications for machine learning and data science projects with minimal code.
 
 For more information, [click here](https://docs.streamlit.io/)
-
-### Project Evaluation
-* Both a knowledge base and an LLM are used in the RAG flow
-* Multiple retrieval approaches are evaluated, and the best one is used
-* Multiple RAG approaches are evaluated, and the best one is used
-* Streamlit frontend and FastAPI backend API
-* Automated ingestion with a Python script
-* User feedback is collected and there's a dashboard
-* All required service is containerized and in docker-compose
-* Code is reproducible, Instructions are clear, the dataset is accessible, its easy to run the code and it works
